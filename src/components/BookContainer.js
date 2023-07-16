@@ -3,7 +3,12 @@ import BookItem from "./BookItem";
 import { useDispatch, useSelector } from "react-redux";
 import fetchBooks from "../redux/books/thunk/fetchBooks";
 
-const BookContainer = ({ clickedButton, searchValue, setUpdateId }) => {
+const BookContainer = ({
+  clickedButton,
+  searchValue,
+  setUpdateId,
+  updateId,
+}) => {
   let books = useSelector((state) => state.books);
   const dispatch = useDispatch();
   if (clickedButton === "Featured") {
@@ -22,7 +27,12 @@ const BookContainer = ({ clickedButton, searchValue, setUpdateId }) => {
           book.name?.toLowerCase().includes(searchValue?.toLowerCase())
         )
         .map((book) => (
-          <BookItem key={book.id} book={book} setUpdateId={setUpdateId} />
+          <BookItem
+            key={book.id}
+            book={book}
+            setUpdateId={setUpdateId}
+            updateId={updateId}
+          />
         ))}
     </div>
   );

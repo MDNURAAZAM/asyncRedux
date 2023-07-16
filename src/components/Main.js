@@ -45,6 +45,7 @@ const Main = ({ searchValue }) => {
             setUpdateId={setUpdateId}
             searchValue={searchValue}
             clickedButton={clickedButton}
+            updateId={updateId}
           />
         </div>
         <div>

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import deleteBook from "../redux/books/thunk/deleteBook";
 
-const BookItem = ({ book, setUpdateId }) => {
+const BookItem = ({ book, setUpdateId, updateId }) => {
   const dispatch = useDispatch();
   const { name, author, thumbnail, price, rating, featured, id } = book;
 
@@ -51,7 +51,11 @@ const BookItem = ({ book, setUpdateId }) => {
                 />
               </svg>
             </button>
-            <button className="lws-delete" onClick={handleDeleteButtonClick}>
+            <button
+              className="lws-delete"
+              onClick={handleDeleteButtonClick}
+              disabled={updateId === id}
+            >
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
