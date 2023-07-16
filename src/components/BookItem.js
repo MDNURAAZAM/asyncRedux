@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import deleteBook from "../redux/books/thunk/deleteBook";
 
-const BookItem = ({ book }) => {
+const BookItem = ({ book, setUpdateId }) => {
   const dispatch = useDispatch();
   const { name, author, thumbnail, price, rating, featured, id } = book;
 
@@ -36,7 +36,7 @@ const BookItem = ({ book }) => {
           </span>
 
           <div className="text-gray-500 space-x-2">
-            <button className="lws-edit">
+            <button className="lws-edit" onClick={() => setUpdateId(id)}>
               <svg
                 fill="none"
                 viewBox="0 0 24 24"

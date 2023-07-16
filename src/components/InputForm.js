@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import addBook from "../redux/books/thunk/addBook";
+import updateBook from "../redux/books/thunk/updateBook";
 
-const InputForm = () => {
+const InputForm = ({ updateId, setUpdateId }) => {
+  const books = useSelector((state) => state.books);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
@@ -21,7 +23,14 @@ const InputForm = () => {
       rating,
       featured,
     };
-    dispatch(addBook(book));
+
+    if (updateId) {
+      dispatch(updateBook(updateId, book));
+      setUpdateId("");
+    } else {
+      dispatch(addBook(book));
+    }
+
     setName("");
     setAuthor("");
     setThumbnail("");
@@ -29,6 +38,18 @@ const InputForm = () => {
     setRating("");
     setFeatured(false);
   };
+
+  useEffect(() => {
+    if (updateId) {
+      let bookInfo = books.find((book) => book.id === updateId);
+      setName(bookInfo.name);
+      setAuthor(bookInfo.author);
+      setThumbnail(bookInfo.thumbnail);
+      setPrice(bookInfo.price);
+      setRating(bookInfo.rating);
+      setFeatured(bookInfo.featured);
+    }
+  }, [updateId, books]);
   return (
     <div className="p-4 overflow-hidden bg-white shadow-cardShadow rounded-md">
       <h4 className="mb-8 text-xl font-bold text-center">Add New Book</h4>
@@ -118,7 +139,7 @@ const InputForm = () => {
         </div>
 
         <button type="submit" className="submit" id="submit">
-          Add Book
+          {updateId ? "Update" : "Add"} Book
         </button>
       </form>
     </div>

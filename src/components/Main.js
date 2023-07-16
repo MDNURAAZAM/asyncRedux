@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BookContainer from "./BookContainer";
 import InputForm from "./InputForm";
 
 const Main = ({ searchValue }) => {
   const [clickedButton, setClickedButton] = useState("All");
+  const [updateId, setUpdateId] = useState("");
 
   // const handleButtonClick = (button) => {
 
   // }
+
+  // useEffect(() => {
+  //   console.log(updateId);
+  // }, [updateId]);
   return (
     <main className="py-12 2xl:px-6">
       <div className="container grid xl:grid-cols-[auto_350px] 2xl:grid-cols-[auto_400px] gap-4 2xl:gap-8">
@@ -37,12 +42,13 @@ const Main = ({ searchValue }) => {
             </div>
           </div>
           <BookContainer
+            setUpdateId={setUpdateId}
             searchValue={searchValue}
             clickedButton={clickedButton}
           />
         </div>
         <div>
-          <InputForm />
+          <InputForm updateId={updateId} setUpdateId={setUpdateId} />
         </div>
       </div>
     </main>

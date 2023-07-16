@@ -1,10 +1,10 @@
 import { ADDED, LOADED, UPDATED, DELETED } from "./actionTypes";
 import initialState from "./initialState";
 
-const nextItemId = (items) => {
-  const maxId = items.reduce((maxId, item) => Math.max(maxId, item.id), -1);
-  return maxId + 1;
-};
+// const nextItemId = (items) => {
+//   const maxId = items.reduce((maxId, item) => Math.max(maxId, item.id), -1);
+//   return maxId + 1;
+// };
 const booksReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOADED:
