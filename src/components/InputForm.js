@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import addBook from "../redux/books/thunk/addBook";
 import updateBook from "../redux/books/thunk/updateBook";
+import getBook from "../redux/books/thunk/getBook";
 
 const InputForm = ({ updateId, setUpdateId }) => {
-  const books = useSelector((state) => state.books);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
@@ -41,15 +41,16 @@ const InputForm = ({ updateId, setUpdateId }) => {
 
   useEffect(() => {
     if (updateId) {
-      let bookInfo = books.find((book) => book.id === updateId);
-      setName(bookInfo.name);
-      setAuthor(bookInfo.author);
-      setThumbnail(bookInfo.thumbnail);
-      setPrice(bookInfo.price);
-      setRating(bookInfo.rating);
-      setFeatured(bookInfo.featured);
+      getBook(updateId).then((bookInfo) => {
+        setName(bookInfo.name);
+        setAuthor(bookInfo.author);
+        setThumbnail(bookInfo.thumbnail);
+        setPrice(bookInfo.price);
+        setRating(bookInfo.rating);
+        setFeatured(bookInfo.featured);
+      });
     }
-  }, [updateId, books]);
+  }, [updateId]);
   return (
     <div className="p-4 overflow-hidden bg-white shadow-cardShadow rounded-md">
       <h4 className="mb-8 text-xl font-bold text-center">Add New Book</h4>
