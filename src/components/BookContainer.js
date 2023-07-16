@@ -14,7 +14,7 @@ const BookContainer = () => {
     <div className="lws-bookContainer">
       {/* <!-- Card 1 --> */}
       {books.map((book) => (
-        <BookItem />
+        <BookItem key={book.id} book={book} />
       ))}
     </div>
   );
