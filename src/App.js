@@ -1,13 +1,17 @@
 import Main from "./components/Main";
 import Nav from "./components/Nav";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   return (
-    <div>
-      <Nav></Nav>
+    <Provider store={store}>
+      <div>
+        <Nav></Nav>
 
-      <Main></Main>
-    </div>
+        <Main></Main>
+      </div>
+    </Provider>
   );
 }
 
