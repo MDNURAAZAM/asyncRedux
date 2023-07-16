@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../images/logo.svg";
 
-const Nav = () => {
+const Nav = ({ searchValue, setSearchValue }) => {
   return (
     <nav className="py-4 2xl:px-6">
       <div className="container flex items-center justify-between">
@@ -32,6 +32,8 @@ const Nav = () => {
               placeholder="Filter books..."
               className="search"
               id="lws-searchBook"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
             />
           </div>
         </form>

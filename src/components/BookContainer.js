@@ -3,19 +3,26 @@ import BookItem from "./BookItem";
 import { useDispatch, useSelector } from "react-redux";
 import fetchBooks from "../redux/books/thunk/fetchBooks";
 
-const BookContainer = () => {
-  const books = useSelector((state) => state.books);
+const BookContainer = ({ clickedButton, searchValue }) => {
+  console.log(searchValue);
+  let books = useSelector((state) => state.books);
   const dispatch = useDispatch();
-
+  if (clickedButton === "Featured") {
+    books = books.filter((book) => book.featured);
+  }
   useEffect(() => {
     dispatch(fetchBooks);
   }, [dispatch]);
   return (
     <div className="lws-bookContainer">
       {/* <!-- Card 1 --> */}
-      {books.map((book) => (
-        <BookItem key={book.id} book={book} />
-      ))}
+      {books
+        .filter((book) =>
+          book.name?.toLowerCase().includes(searchValue?.toLowerCase())
+        )
+        .map((book) => (
+          <BookItem key={book.id} book={book} />
+        ))}
     </div>
   );
 };

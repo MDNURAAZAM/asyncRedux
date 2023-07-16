@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import BookContainer from "./BookContainer";
 import InputForm from "./InputForm";
 
-const Main = () => {
+const Main = ({ searchValue }) => {
+  const [clickedButton, setClickedButton] = useState("All");
+
+  // const handleButtonClick = (button) => {
+
+  // }
   return (
     <main className="py-12 2xl:px-6">
       <div className="container grid xl:grid-cols-[auto_350px] 2xl:grid-cols-[auto_400px] gap-4 2xl:gap-8">
@@ -11,15 +16,30 @@ const Main = () => {
             <h4 className="mt-2 text-xl font-bold">Book List</h4>
 
             <div className="flex items-center space-x-4">
-              <button className="filter-btn active-filter" id="lws-filterAll">
+              <button
+                className={`filter-btn ${
+                  clickedButton === "All" && "active-filter"
+                }`}
+                id="lws-filterAll"
+                onClick={() => setClickedButton("All")}
+              >
                 All
               </button>
-              <button className="filter-btn" id="lws-filterFeatured">
+              <button
+                className={`filter-btn ${
+                  clickedButton === "Featured" && "active-filter"
+                }`}
+                id="lws-filterFeatured"
+                onClick={() => setClickedButton("Featured")}
+              >
                 Featured
               </button>
             </div>
           </div>
-          <BookContainer />
+          <BookContainer
+            searchValue={searchValue}
+            clickedButton={clickedButton}
+          />
         </div>
         <div>
           <InputForm />
