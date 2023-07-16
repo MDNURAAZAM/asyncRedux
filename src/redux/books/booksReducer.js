@@ -14,7 +14,6 @@ const booksReducer = (state = initialState, action) => {
       return [
         ...state,
         {
-          id: nextItemId(state),
           ...action.payload,
         },
       ];

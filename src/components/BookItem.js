@@ -1,7 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import deleteBook from "../redux/books/thunk/deleteBook";
 
 const BookItem = ({ book }) => {
-  const { name, author, thumbnail, price, rating, featured } = book;
+  const dispatch = useDispatch();
+  const { name, author, thumbnail, price, rating, featured, id } = book;
+
+  const handleDeleteButtonClick = () => {
+    dispatch(deleteBook(id));
+  };
 
   let ratings = [];
   for (let index = 0; index < rating; index++) {
@@ -44,7 +51,7 @@ const BookItem = ({ book }) => {
                 />
               </svg>
             </button>
-            <button className="lws-delete">
+            <button className="lws-delete" onClick={handleDeleteButtonClick}>
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
